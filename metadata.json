@@ -1,0 +1,7 @@
+{
+  "name": "Number Tag",
+  "description": "A permission-based networking and advertising platform where connection is driven by intent, not interruption. Users control their access, and businesses pay only for real, accepted connections.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

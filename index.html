@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Tag | Intent-Based Networking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --midnight: #09090b;
+            --cyber-lime: #bef264;
+            --zinc-800: #27272a;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--midnight);
+            color: #fafafa;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .font-heading {
+            font-family: 'Syne', sans-serif;
+        }
+        .glass-dark {
+            background: rgba(9, 9, 11, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .text-glow {
+            text-shadow: 0 0 15px rgba(190, 242, 100, 0.3);
+        }
+        .bg-mesh-dark {
+            background-color: #09090b;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(260, 40%, 15%, 1) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, hsla(84, 80%, 10%, 1) 0, transparent 50%);
+        }
+        
+        /* Advanced Animations */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .animate-fade-in { animation: fadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+
+        @keyframes scaleIn { 
+          from { transform: scale(0.98); opacity: 0; } 
+          to { transform: scale(1); opacity: 1; } 
+        }
+        .animate-scale-in { animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+        @keyframes slideUp {
+          from { transform: translateY(20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-slide-up { animation: slideUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+
+        @keyframes slideLeft {
+          from { transform: translateX(20px); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        .animate-slide-left { animation: slideLeft 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+
+        @keyframes beamIn {
+          0% { transform: scaleY(0); opacity: 0; transform-origin: top; }
+          100% { transform: scaleY(1); opacity: 1; transform-origin: top; }
+        }
+        .animate-beam { animation: beamIn 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+
+        @keyframes syncProgress {
+          0% { width: 0%; }
+          30% { width: 40%; }
+          60% { width: 45%; }
+          100% { width: 100%; }
+        }
+        .animate-sync { animation: syncProgress 2s ease-in-out forwards; }
+
+        /* Stagger Utilities */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+
+        .tag-card {
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .tag-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: var(--cyber-lime);
+            box-shadow: 0 30px 60px -20px rgba(190, 242, 100, 0.2);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--cyber-lime); }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^1.39.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="antialiased">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

@@ -67,7 +67,7 @@ const App: React.FC = () => {
     if (savedAuth === 'true') {
       setIsAuthenticated(true);
     }
-    
+
     // Play global loader sequence
     const timer = setTimeout(() => {
       setIsAppLoading(false);
@@ -94,39 +94,39 @@ const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen overflow-x-hidden">
         <Header onLogout={handleLogout} isAuthenticated={isAuthenticated} />
-        
+
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<PageWrapper><LandingPage /></PageWrapper>} />
             <Route path="/login" element={<PageWrapper><Login onLogin={handleLogin} /></PageWrapper>} />
             <Route path="/forgot-password" element={<PageWrapper><ForgotPassword onLogin={handleLogin} /></PageWrapper>} />
             <Route path="/join" element={<PageWrapper><Onboarding onComplete={handleLogin} /></PageWrapper>} />
-            
-            <Route 
-              path="/dashboard" 
-              element={isAuthenticated ? <PageWrapper><Dashboard /></PageWrapper> : <Navigate to="/login" />} 
+
+            <Route
+              path="/dashboard"
+              element={isAuthenticated ? <PageWrapper><Dashboard /></PageWrapper> : <Navigate to="/login" />}
             />
-            
+
             <Route path="/create-tag" element={isAuthenticated ? <PageWrapper><CreateTag /></PageWrapper> : <Navigate to="/login" />} />
             <Route path="/edit-tag/:id" element={isAuthenticated ? <PageWrapper><EditTag /></PageWrapper> : <Navigate to="/login" />} />
             <Route path="/top-up" element={isAuthenticated ? <PageWrapper><TopUp /></PageWrapper> : <Navigate to="/login" />} />
             <Route path="/transaction-history" element={isAuthenticated ? <PageWrapper><TransactionHistory /></PageWrapper> : <Navigate to="/login" />} />
-            
+
             <Route path="/admin-portal" element={<PageWrapper><AdminDashboard /></PageWrapper>} />
 
             <Route path="/how-it-works" element={<PageWrapper><HowItWorks /></PageWrapper>} />
             <Route path="/individual-tags" element={<PageWrapper><IndividualTags /></PageWrapper>} />
             <Route path="/business-api" element={<PageWrapper><BusinessAPI /></PageWrapper>} />
             <Route path="/pricing" element={<PageWrapper><Pricing /></PageWrapper>} />
-            
+
             <Route path="/privacy-protocol" element={<PageWrapper><PrivacyProtocol /></PageWrapper>} />
             <Route path="/terms-of-intent" element={<PageWrapper><TermsOfIntent /></PageWrapper>} />
             <Route path="/security" element={<PageWrapper><Security /></PageWrapper>} />
             <Route path="/governance" element={<PageWrapper><Governance /></PageWrapper>} />
             <Route path="/philosophy" element={<PageWrapper><Philosophy /></PageWrapper>} />
-            
+
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </main>

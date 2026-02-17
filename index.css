@@ -1,0 +1,94 @@
+
+/* Global Reset and Layout Lock */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden !important;
+  position: relative;
+  -webkit-text-size-adjust: 100%;
+  touch-action: pan-y;
+  background-color: #09090b;
+}
+
+#root {
+  width: 100%;
+  overflow-x: hidden !important;
+  position: relative;
+}
+
+/* Hard reset for all elements to prevent horizontal overflow */
+* {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* Ensure images and media don't overflow */
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Fix for horizontal layout shift during animations */
+.animate-slide-up, 
+.animate-slide-left, 
+.animate-fade-in, 
+.animate-scale-in,
+.animate-beam {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* Container locking */
+.container {
+  width: 100% !important;
+  max-width: 1280px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  overflow-x: hidden !important;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+/* Responsive typography clamping for mobile */
+@media (max-width: 640px) {
+  h1 { font-size: clamp(2.5rem, 8vw, 4rem) !important; }
+  h2 { font-size: clamp(2rem, 6vw, 3rem) !important; }
+  .text-5xl { font-size: 2.5rem !important; }
+  .text-6xl { font-size: 3rem !important; }
+  .text-7xl { font-size: 3.5rem !important; }
+  .text-8xl { font-size: 4rem !important; }
+  .text-9xl { font-size: 4.5rem !important; }
+  
+  /* Prevent horizontal swinging by forcing all elements to bridge the gap */
+  .flex-nowrap {
+    flex-wrap: wrap !important;
+  }
+}
+
+/* Custom scrollbar to ensure it doesn't add width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #bef264;
+}

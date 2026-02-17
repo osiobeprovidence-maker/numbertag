@@ -1,12 +1,20 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Initialize AI client lazily to prevent crash on startup if key is missing
+const getAI = () => {
+  const apiKey = process.env.API_KEY;
+  if (!apiKey) {
+    throw new Error("Gemini API Key is missing. Please add VITE_GEMINI_API_KEY to your .env file or deployment variables.");
+  }
+  return new GoogleGenAI({ apiKey });
+};
 
 export const generateNumberTag = async (description: string, goal: string) => {
   try {
+    const ai = getAI();
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-2.0-flash", // Updated to stable model
       contents: `Generate a 'Number Tag' profile based on this user description: "${description}" and goal: "${goal}". 
       
       A Number Tag is a concise representation of intent.
@@ -27,8 +35,8 @@ export const generateNumberTag = async (description: string, goal: string) => {
             publicIntentMask: { type: Type.STRING, description: "A neutral, professional-sounding mask for the intent statement." },
             category: { type: Type.STRING, description: "One of: Hiring, Collaboration, Investment, Mentorship, Sales, Social" },
             suggestedColor: { type: Type.STRING, description: "A Tailwind color class (e.g. 'indigo-600', 'emerald-500', 'rose-500')" },
-            tags: { 
-              type: Type.ARRAY, 
+            tags: {
+              type: Type.ARRAY,
               items: { type: Type.STRING },
               description: "3-4 keywords including true intent keywords for matching"
             }
@@ -56,8 +64,9 @@ export const generateNumberTag = async (description: string, goal: string) => {
 
 export const globalSignalScout = async (query: string) => {
   try {
+    const ai = getAI();
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-2.0-flash",
       contents: `Search for professional signals, industry leads, or active networking nodes related to this query: "${query}". 
       Identify specific entities, companies, or professional groups that align with the intent of Number Tag (networking/advertising).
       Provide a concise summary of your findings.`,
@@ -68,7 +77,7 @@ export const globalSignalScout = async (query: string) => {
 
     const text = response.text;
     const groundingChunks = response.candidates?.[0]?.groundingMetadata?.groundingChunks || [];
-    
+
     const links = groundingChunks
       .filter(chunk => chunk.web && chunk.web.uri)
       .map(chunk => ({
@@ -78,7 +87,7 @@ export const globalSignalScout = async (query: string) => {
 
     return {
       text,
-      links: Array.from(new Map(links.map(l => [l.uri, l])).values()) 
+      links: Array.from(new Map(links.map(l => [l.uri, l])).values())
     };
   } catch (error) {
     console.error("Scout Error:", error);
